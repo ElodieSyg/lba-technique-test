@@ -33,6 +33,7 @@ app.use(cookieParser());
 
 // ROUTERS
 app.use("/register", require("./router/register"));
+app.use("/login", require("./router/login"));
 
 app.listen(process.env.PORT, () => {
     console.log("Server started, listening on PORT", process.env.PORT)
