@@ -19,7 +19,7 @@ router.route("/")
             console.log((err));
             res.status(400).json({
                 status: "Fail",
-                message: "An error happened",
+                error: "An error happened",
             });
         };
     });

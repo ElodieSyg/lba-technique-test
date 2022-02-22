@@ -38,6 +38,7 @@ app.use(debug);
 // ROUTERS
 app.use("/register", require("./router/Register"));
 app.use("/login", require("./router/login"));
+app.use("/product", require("./router/product"));
 app.use("/is-logged", require("./router/isLogged"));
 
 app.listen(process.env.PORT, () => {
