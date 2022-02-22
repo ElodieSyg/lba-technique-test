@@ -9,7 +9,7 @@ dotenv.config({
 });
 const mongoose = require("mongoose");
 // MIDDLEWARES IMPORTATIONS
-const debug = require("./middleware/protect/debug");
+const debug = require("./middleware/debug");
 
 // MONGODB CONNEXTION
 mongoose
