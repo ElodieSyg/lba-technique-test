@@ -1,11 +1,14 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 dotenv.config({
     path: "./config.env"
 });
 const mongoose = require("mongoose");
 
+// MONGODB CONNEXTION
 mongoose
     .connect(process.env.DATABASE_URL, {
         useNewUrlParser: true,
@@ -18,6 +21,18 @@ mongoose
         console.log(err);
         process.exit;
     });
+
+// MIDDLEWARES
+app.use(
+    cors({
+        credentials: true,
+        origin: "http://localhost:3001",
+    }));
+app.use(express.json());
+app.use(cookieParser());
+
+// ROUTERS
+app.use("/register", require("./router/register"));
 
 app.listen(process.env.PORT, () => {
     console.log("Server started, listening on PORT", process.env.PORT)
