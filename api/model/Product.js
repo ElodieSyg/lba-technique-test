@@ -1,16 +1,15 @@
 const mongoose = require("mongoose");
 
 const ProductSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    type: { type: String, required: true },
-    price: { type: Number, required: true},
-    rating: { type: Number, required: true },
-    warranty_years: { type: Number, required: true },
-    available: { type: Boolean, requierd: true },
-    userId: { type: mongoose.Types.ObjectId, ref: "user"},
+    name: { type: String },
+    type: { type: String },
+    price: { type: Number },
+    rating: { type: Number },
+    warranty_years: { type: Number },
+    available: { type: Boolean },
+    userId: { type: mongoose.Types.ObjectId, ref: "user" },
 });
 
-module.export =
-    mongoose.models.Products ||
-    mongoose.model("Products", ProductSchema);
-    
+const Product = mongoose.model("products", ProductSchema);
+
+module.exports = Product;

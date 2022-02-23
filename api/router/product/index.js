@@ -1,4 +1,4 @@
-const express = erquire("express");
+const express = require("express");
 const router = express.Router();
 // MODELS IMPORTATIONS
 const Product = require("../../model/Product");
@@ -26,8 +26,8 @@ router.route("/")
         };
     })
     .post(async (req, res) => {
+        console.log("post")
         const { name, type, price, rating, warranty_years, available } = req.body;
-        console.log("body", name, type, price, rating, warranty_years, available);
         try {
             const newProduct = await Product.create({ name, type, price, rating, warranty_years, available });
             return res.status(201).json({
@@ -107,4 +107,4 @@ router.route("/id")
         };
     });
 
-export default router;
+module.exports = router;

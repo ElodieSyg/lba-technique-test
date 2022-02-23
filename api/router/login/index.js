@@ -2,11 +2,13 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
+// MIDDLEWARES IMPORTATIONS
+const protect = require("../../middleware/protect/index");
 // MODELS IMPORTATIONS
 const User = require("../../model/User");
 
 router.route("/")
-    .post(async (req, res) => {
+    .post(protect, async (req, res) => {
         const { email, password } = req.body;
         try {
             const user = await User.findOne({ email });
