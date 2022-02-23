@@ -72,13 +72,13 @@ const PatchDialog = props => {
                         variant="standard"
                         onChange={e => setPrice(e.target.value)} />
                     <TextField
-                        type="text"
+                        type="number"
                         id="rating"
                         label="Rating"
                         variant="standard"
                         onChange={e => setRating(e.target.value)} />
                     <TextField
-                        type="text"
+                        type="number"
                         id="warranty_years"
                         label="Guarentee"
                         variant="standard"
