@@ -14,10 +14,12 @@ import Dashboard from "./view/dashboard";
 // COMPONENTS IMPORTATIONS
 import Navbar from "./component/navbar";
 // CONTEXT IMPORTATIONS
-//import UserContext from "./context/userContext";
+import UserContext from "./context/logContext.js";
 
 const App = () => {
-  //const logState = useContext(UserContext);
+  const logState = useContext(UserContext);
+
+  console.log("log state", logState);
 
 /*   console.log("logstate", logState)
   useEffect(() => {
@@ -32,7 +34,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {/* <UserContext> */}
+      <UserContext>
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Home />} />
@@ -40,7 +42,7 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
         </Routes>
-      {/* </UserContext> */}
+      </UserContext>
     </BrowserRouter>
   );
 };

@@ -14,9 +14,25 @@ router.route("/")
                 });
             };
 
+            const newFormat = [];
+
+            for (let i = 0; i < products.length; ++i) {
+                let data = {
+                    _id: products[i]._id,
+                    name: products[i].name,
+                    type: products[i].type,
+                    price: products[i].price,
+                    rating: products[i].rating,
+                    warranty_years: products[i].warranty_years,
+                    available: products[i].available,
+                };
+                newFormat.push(data);
+            };
+
             return res.status(200).json({
                 status: "Success",
                 products,
+                newFormat,
             });
         } catch (error) {
             return res.status(500).json({
@@ -26,7 +42,6 @@ router.route("/")
         };
     })
     .post(async (req, res) => {
-        console.log("post")
         const { name, type, price, rating, warranty_years, available } = req.body;
         try {
             const newProduct = await Product.create({ name, type, price, rating, warranty_years, available });
@@ -41,12 +56,11 @@ router.route("/")
                 error: "Internal Server Error",
             });
         };
-    });
+    })
 
-router.route("/id")
+router.route("/:id")
     .get(async (req, res) => {
         const { id } = req.params;
-        console.log("id", id);
         try {
             const product = await Product.findById({ _id: id });
 
@@ -70,13 +84,11 @@ router.route("/id")
         };
     })
     .patch(async (req, res) => {
-        const { id } = req.params;
+        const id = req.params.id;
         const { name, type, price, rating, warranty_years, available } = req.body;
-        console.log("id", id);
-        console.log("body", name, type, price, rating, warranty_years, available);
+
         try {
-            const product = await Product.findByIdAndUpdate({ _id: id }, { name, type, price, rating, warranty_years, available });
-            console.log("product", product);
+            await Product.findByIdAndUpdate({ _id: id }, { name, type, price, rating, warranty_years, available });
             return res.status(200).json({
                 status: "Success",
                 message: "Product succefully updated",
@@ -89,12 +101,10 @@ router.route("/id")
         };
     })
     .delete(async (req, res) => {
-        const { id } = req.params;
-        console.log("id", id);
+        const id = req.params.id;
 
         try {
-            const product = await Product.findByIdAndDelete({ _id: id });
-            console.log("product", product);
+            await Product.findByIdAndDelete({ _id: id });
             return res.status(200).json({
                 status: "Success",
                 message: "Product succefully deleted",
