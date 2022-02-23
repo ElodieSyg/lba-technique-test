@@ -14,12 +14,12 @@ import Dashboard from "./view/dashboard";
 // COMPONENTS IMPORTATIONS
 import Navbar from "./component/navbar";
 // CONTEXT IMPORTATIONS
-import UserContext from "./context/userContext";
+//import UserContext from "./context/userContext";
 
 const App = () => {
-  const logState = useContext(UserContext);
+  //const logState = useContext(UserContext);
 
-  console.log("logstate", logState)
+/*   console.log("logstate", logState)
   useEffect(() => {
     axios.get(`${server}/is-logged`, { withCredentials: true })
       .then(res => {
@@ -28,11 +28,11 @@ const App = () => {
           logState.setLogged(true);
         };
       });
-  }, [logState]);
+  }, [logState]); */
 
   return (
     <BrowserRouter>
-      <UserContext>
+      {/* <UserContext> */}
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Home />} />
@@ -40,7 +40,7 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
         </Routes>
-      </UserContext>
+      {/* </UserContext> */}
     </BrowserRouter>
   );
 };
