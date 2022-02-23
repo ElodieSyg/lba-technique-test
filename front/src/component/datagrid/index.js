@@ -74,14 +74,18 @@ const DashboardDataGrid = props => {
                 <PatchDialog
                     openPatch={openPatch}
                     handleClosePatch={handleClosePatch}
-                    id={id} />
+                    id={id}
+                    setSuccessAlert={props.setSuccessAlert}
+                    setErrorAlert={props.setErrorAlert} />
             }
             {
                 openDelete &&
                 <DeleteDialog
                     openDelete={openDelete}
                     handleCloseDelete={handleCloseDelete}
-                    id={id} />
+                    id={id}
+                    setSuccessAlert={props.setSuccessAlert}
+                    setErrorAlert={props.setErrorAlert} />
             }
         </div>
     );

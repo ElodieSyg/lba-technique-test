@@ -31,11 +31,15 @@ const PatchDialog = props => {
             .then(res => {
                 if (res.data.status === "Success") {
                     if (res.data.status === "Success") {
-                        window.location.reload();
+                        props.setSuccessAlert(true);
                     } else {
-                        console.log("Add error here");
-                    };                }
+                        props.setErrorAlert(true);
+                    };
+                };
             })
+            .then(
+                props.handleClosePatch
+            );
     };
 
     const handleChangeAvailable = e => {
