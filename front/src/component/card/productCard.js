@@ -27,7 +27,7 @@ const ProductCard = props => {
                     {props.product.name}
                 </Typography>
                 <Typography>
-                    {props.product.price}$
+                    {props.product.price} $
                 </Typography>
                 <Typography variant="body2">
                     <WarrantyContainer>
@@ -37,7 +37,11 @@ const ProductCard = props => {
                     <br />
                     Guaranteed {props.product.warranty_years} year
                     <br />
-                    {props.product.available}
+                    {
+                        props.product.available === true
+                            ? <p>Available</p>
+                            : <p>Not available</p>
+                    }
                 </Typography>
             </CardContent>
         </StyledCard>
