@@ -17,8 +17,30 @@ import {
     Container
 } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { styled } from "@mui/system";
+import StyledTypography from "../../component/typography";
+import ContainedButton from "../../component/button/containedButton";
 
 const theme = createTheme();
+
+const StyledContainer = styled("div")({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+});
+
+const Item = styled("div")({
+    margin: "0.5rem",
+});
+
+const FormContainer = styled("div")({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "30rem",
+});
 
 const Register = () => {
     const [email, setEmail] = useState("");
@@ -30,55 +52,59 @@ const Register = () => {
             .then(res => {
                 console.log("response in handle submit", res);
                 if (res.data.status === "Success") {
-                   navigate ("/login");
+                    navigate("/login");
                 };
             });
     };
 
     return (
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box>
-                    <Typography component="h1" variant="h5">
-                        Créer un compte
-                    </Typography>
-                    <Box component="form" onSubmit={(e) => preventDefault(e)} noValidate>
-                        <TextField
-                            required
-                            fullWidth
-                            id="email"
-                            label="Adresse mail"
-                            name="email"
-                            onChange={e => setEmail(e.target.value)}
-                        />
-                        <TextField
-                            required
-                            fullWidth
-                            name="password"
-                            label="Mot de passe"
-                            type="password"
-                            id="password"
-                            onChange={e => setPassword(e.target.value)}
-                        />
-                        <Button
+            <CssBaseline />
+            <StyledContainer>
+                <StyledTypography component="h1" variant="h5">
+                    Créer un compte
+                </StyledTypography>
+                <FormContainer component="form" onSubmit={(e) => preventDefault(e)} noValidate>
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        autoFocus
+                        onChange={e => setEmail(e.target.value)} />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    <Item>
+                        <ContainedButton
                             type="submit"
                             fullWidth
                             variant="contained"
                             onClick={handleSubmit}
                         >
                             Sign In
-                        </Button>
-                        <Grid container>
-                            <Grid item>
-                                <Link href="/login" variant="body2">
-                                    {"Vous avez déjà un compte? Connectez-vous ici"}
-                                </Link>
-                            </Grid>
+                        </ContainedButton>
+                    </Item>
+                    <Grid container>
+                        <Grid item>
+                            <Link href="/login" variant="body2">
+                                {"Vous avez déjà un compte? Connectez-vous ici"}
+                            </Link>
                         </Grid>
-                    </Box>
-                </Box>
-            </Container>
+                    </Grid>
+                </FormContainer>
+            </StyledContainer>
         </ThemeProvider>
     );
 };

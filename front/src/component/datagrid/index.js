@@ -28,7 +28,7 @@ const DashboardDataGrid = props => {
         { id: 5, field: "warranty_years", headerName: "Guarentee", width: 190 },
         { id: 6, field: "available", headerName: "Available", width: 190 },
         {
-            id: 7, field: "action", headerName: "Supprimer ou modifier", width: 190,
+            id: 7, field: "action", headerName: "Patch or delete", width: 190,
             renderCell: params => {
                 return (
                     <StyledBox>
