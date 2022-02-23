@@ -67,6 +67,9 @@ const Navbar = () => {
                         onClose={handleCloseUserMenu}
                     >
                         <MenuItem>
+                            <Typography onClick={() => handleRedirect("/")}>Home</Typography>
+                        </MenuItem>
+                        <MenuItem>
                             <Typography onClick={() => handleRedirect("/dashboard")}>Dashboard</Typography>
                         </MenuItem>
                         <MenuItem>
@@ -99,7 +102,7 @@ const Navbar = () => {
 
     return (
         <StyledAppBar position="static">
-            { LoggedNavbar()}
+            {LoggedNavbar()}
         </StyledAppBar>
     );
 };
