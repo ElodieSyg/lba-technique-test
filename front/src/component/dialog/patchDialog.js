@@ -28,18 +28,14 @@ const PatchDialog = props => {
 
     const handlePatch = () => {
         axios.patch(`${server}/product/${props.id}`, { name, type, price, rating, warranty_years, available: checked }, { withCredentials: true })
-            .then(res => {
+            .then(async res => {
                 if (res.data.status === "Success") {
-                    if (res.data.status === "Success") {
-                        props.setSuccessAlert(true);
-                    } else {
-                        props.setErrorAlert(true);
-                    };
+                    props.handleClosePatch();
+                    window.location.reload();
+                } else {
+                    props.setErrorAlert(true);
                 };
-            })
-            .then(
-                props.handleClosePatch
-            );
+            });
     };
 
     const handleChangeAvailable = e => {

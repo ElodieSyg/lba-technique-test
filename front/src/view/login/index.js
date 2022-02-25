@@ -11,14 +11,14 @@ import {
     TextField,
     Link,
     Grid,
-    Box,
-    Container
+    Container,
 } from "@mui/material";
 import { styled } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 // COMPONENTS IMPORTATIONS
 import ContainedButton from "../../component/button/containedButton";
 import StyledTypography from "../../component/typography";
+import ErrorAlert from "../../component/alert/error";
 
 const theme = createTheme();
 
@@ -44,6 +44,7 @@ const FormContainer = styled("div")({
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const handleSubmit = () => {
@@ -51,20 +52,26 @@ const Login = () => {
             .then(res => {
                 if (res.data.status === "Success") {
                     navigate("/dashboard");
-                };
+                } else {
+                    setError(true);
+                }
             });
     };
 
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <StyledContainer>
-                <Item>
-                    <StyledTypography component="h1" variant="h5">
-                        Se connecter
-                    </StyledTypography>
-                </Item>
-                <FormContainer component="form" onSubmit={(e) => preventDefault(e)} noValidate>
+            <Container component="main" maxWidth="xs">
+                {
+                    error && <ErrorAlert message="Incorrect credentials" />
+                }
+                <StyledContainer>
+                    <Item>
+                        <StyledTypography component="h1" variant="h5">
+                            Se connecter
+                        </StyledTypography>
+                    </Item>
+                    <FormContainer component="form" onSubmit={(e) => preventDefault(e)} noValidate>
                         <TextField
                             margin="normal"
                             required
@@ -87,25 +94,26 @@ const Login = () => {
                             autoComplete="current-password"
                             onChange={e => setPassword(e.target.value)}
                         />
-                    <Item>
-                        <ContainedButton
-                            type="submit"
-                            width="10rem"
-                            variant="contained"
-                            onClick={handleSubmit}
-                        >
-                            Se connecter
-                        </ContainedButton>
-                    </Item>
-                    <Grid container>
-                        <Grid item>
-                            <Link href="/register" variant="body2">
-                                {"Vous n'avez pas de compte? Créez en un ici"}
-                            </Link>
+                        <Item>
+                            <ContainedButton
+                                type="submit"
+                                width="10rem"
+                                variant="contained"
+                                onClick={handleSubmit}
+                            >
+                                Se connecter
+                            </ContainedButton>
+                        </Item>
+                        <Grid container>
+                            <Grid item>
+                                <Link href="/register" variant="body2">
+                                    {"Vous n'avez pas de compte? Créez en un ici"}
+                                </Link>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </FormContainer>
-            </StyledContainer>
+                    </FormContainer>
+                </StyledContainer>
+            </Container>
         </ThemeProvider >
     );
 };

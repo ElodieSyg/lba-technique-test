@@ -17,7 +17,7 @@ const ContainedButton = props => {
     });
 
     return (
-        <Button>{props.children}</Button>
+        <Button onClick={props.onClick}>{props.children}</Button>
     );
 };
 

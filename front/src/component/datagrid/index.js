@@ -63,7 +63,7 @@ const DashboardDataGrid = props => {
     };
 
     return (
-        <div style={{ height: 350, width: '100%' }}>
+        <div style={{ height: 400, width: '100%' }}>
             <DataGrid
                 getRowId={(row) => row._id}
                 columns={columns}
@@ -76,7 +76,9 @@ const DashboardDataGrid = props => {
                     handleClosePatch={handleClosePatch}
                     id={id}
                     setSuccessAlert={props.setSuccessAlert}
-                    setErrorAlert={props.setErrorAlert} />
+                    setErrorAlert={props.setErrorAlert}
+                    productsNF={props.productsNF}
+                    setProductsNF={props.setProductsNF} />
             }
             {
                 openDelete &&
@@ -84,6 +86,8 @@ const DashboardDataGrid = props => {
                     openDelete={openDelete}
                     handleCloseDelete={handleCloseDelete}
                     id={id}
+                    productsNF={props.productsNF}
+                    setProductsNF={props.setProductsNF}
                     setSuccessAlert={props.setSuccessAlert}
                     setErrorAlert={props.setErrorAlert} />
             }

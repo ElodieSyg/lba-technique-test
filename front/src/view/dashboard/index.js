@@ -6,8 +6,8 @@ import axios from "axios";
 import { styled } from "@mui/material";
 import { Tooltip } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
-import { useNavigate } from "react-router-dom";
 // COMPONENTS IMPORTATIONS
+import Navbar from "../../component/navbar";
 import DashboardDataGrid from "../../component/datagrid";
 import StyledTypography from "../../component/typography";
 import SuccessAlert from "../../component/alert/success";
@@ -34,7 +34,6 @@ const Dashboard = () => {
     const [successAlert, setSuccessAlert] = useState(false);
     const [errorAlert, setErrorAlert] = useState(false);
     const [openPost, setOpenPost] = useState(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`${server}/product`, { withCredentials: true })
@@ -55,40 +54,47 @@ const Dashboard = () => {
     };
 
     return (
-        <Container>
-            {
-                successAlert &&
-                <SuccessAlert
+        <>
+            <Navbar />
+            <Container>
+                {
+                    successAlert &&
+                    <SuccessAlert
+                        setSuccessAlert={setSuccessAlert}
+                        message="Action succefully done !" />
+                }
+                {
+                    errorAlert &&
+                    <ErrorAlert
+                        setErrorAlert={setErrorAlert}
+                        message="An error happenned, please try again in few minutes" />
+                }
+                <StyledBox>
+                    <StyledTypography>Welcome on your dashboard !</StyledTypography>
+                    <Tooltip title="Add a new product">
+                        <StyledCursor>
+                            <AddIcon fontSize="large" onClick={() => setOpenPost(true)} />
+                        </StyledCursor>
+                    </Tooltip>
+                </StyledBox>
+                <DashboardDataGrid
+                    products={products}
+                    productsNF={productsNF}
+                    setProductsNF={setProductsNF}
                     setSuccessAlert={setSuccessAlert}
-                    message="Action succefully done !" />
-            }
-            {
-                errorAlert &&
-                <ErrorAlert
-                    setErrorAlert={setErrorAlert}
-                    message="An error happenned, please try again in few minutes" />
-            }
-            <StyledBox>
-                <StyledTypography>Welcome on your dashboard !</StyledTypography>
-                <Tooltip title="Add a new product">
-                    <StyledCursor>
-                        <AddIcon fontSize="large" onClick={() => setOpenPost(true)} />
-                    </StyledCursor>
-                </Tooltip>
-            </StyledBox>
-            <DashboardDataGrid
-                products={products}
-                productsNF={productsNF}
-                setSuccessAlert={setSuccessAlert}
-                setErrorAlert={setErrorAlert} />
-            {
-                openPost &&
-                <PostDialog
-                    openPost={openPost}
-                    setOpenPost={setOpenPost}
-                    handleClosePost={handleClosePost} />
-            }
-        </Container>
+                    setErrorAlert={setErrorAlert} />
+                {
+                    openPost &&
+                    <PostDialog
+                        openPost={openPost}
+                        setOpenPost={setOpenPost}
+                        handleClosePost={handleClosePost}
+                        setSuccessAlert={setSuccessAlert}
+                        productsNF={productsNF}
+                        setProductsNF={setProductsNF} />
+                }
+            </Container>
+        </>
     );
 };
 

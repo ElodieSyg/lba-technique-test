@@ -40,6 +40,7 @@ app.use("/register", require("./router/Register"));
 app.use("/login", require("./router/login"));
 app.use("/product", require("./router/product"));
 app.use("/is-logged", require("./router/isLogged"));
+app.use("/logout", require("./router/logout"));
 
 app.listen(process.env.PORT, () => {
     console.log("Server started, listening on PORT", process.env.PORT)

@@ -8,7 +8,7 @@ const protect = require("../../middleware/protect/index");
 const User = require("../../model/User");
 
 router.route("/")
-    .post(protect, async (req, res) => {
+    .post(async (req, res) => {
         const { email, password } = req.body;
         try {
             const user = await User.findOne({ email });
@@ -16,6 +16,7 @@ router.route("/")
             if (!user) throw new Error("User not found");
 
             const isPasswordValid = await bcrypt.compare(password, user.password);
+
 
             if (!isPasswordValid) throw new Error("Invalid credentials");
 
@@ -35,7 +36,7 @@ router.route("/")
                     error,
                 });
             };
-            if (error === "Invalid email or password") {
+            if (error === "Invalid credentials") {
                 return res.status(401).json({
                     status: "Fail",
                     error,

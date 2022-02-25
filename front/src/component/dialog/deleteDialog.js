@@ -14,17 +14,17 @@ const DeleteDialog = props => {
         axios.delete(`${server}/product/${props.id}`, { withCredentials: true })
             .then(res => {
                 if (res.data.status === "Success") {
-                    props.handleCloseDelete()
+                    props.handleCloseDelete();
                     window.location.reload();
+                    setTimeout(timer, 500);
                 } else {
                     props.setErrorAlert(true);
                 };
-            })
-            .then(() => {
-                setTimeout(() => {
-                    props.setSuccessAlert(true);
-                });
             });
+    };
+
+    const timer = () => {
+        props.setSuccessAlert(true);
     };
 
     return (

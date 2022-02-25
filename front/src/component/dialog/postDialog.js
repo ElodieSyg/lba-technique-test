@@ -29,16 +29,15 @@ const PostDialog = props => {
     const handlePost = () => {
         axios.post(`${server}/product`, { name, type, price, rating, warranty_years, available: checked }, { withCredentials: true })
             .then(res => {
-                console.log(res)
                 if (res.data.status === "Success") {
                     props.setOpenPost(false);
+                    props.setProductsNF(
+                        prevState => [...prevState, res.data.newProduct]
+                    );
                     props.setSuccessAlert(true);
                 } else {
                     props.setErrorAlert(true);
                 };
-            })
-            .then(() => {
-                window.location.reload();
             });
     };
 

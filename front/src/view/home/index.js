@@ -5,6 +5,7 @@ import axios from "axios";
 import { server } from "../../tool";
 // COMPONENTS IMPORTATIONS
 import ProductCard from "../../component/card/productCard";
+import Navbar from "../../component/navbar";
 // MUI IMPORTATIONS
 import { styled } from "@mui/system";
 
@@ -37,15 +38,18 @@ const Home = () => {
     };
 
     return (
-        <StyledBox>
-            {
-                products.map(item => (
-                    <ProductCard
-                        key={item._id}
-                        product={item} />
-                ))
-            }
-        </StyledBox>
+        <>
+            <Navbar />
+            <StyledBox>
+                {
+                    products.map(item => (
+                        <ProductCard
+                            key={item._id}
+                            product={item} />
+                    ))
+                }
+            </StyledBox>
+        </>
     );
 };
 

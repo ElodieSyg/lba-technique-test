@@ -6,7 +6,6 @@ const protect = require("../../middleware/protect");
 
 router.route("/")
     .get(protect, (req, res) => {
-        console.log("inside is logged")
         try {
             const data = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
 

@@ -7,14 +7,10 @@ import preventDefault from "../../util/preventDefault";
 import { server } from "../../tool";
 // MUI IMPORTATIONS
 import {
-    Button,
     CssBaseline,
     TextField,
     Link,
     Grid,
-    Box,
-    Typography,
-    Container
 } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled } from "@mui/system";
@@ -50,9 +46,8 @@ const Register = () => {
     const handleSubmit = () => {
         axios.post(`${server}/register`, { email, password }, { withCredentials: true })
             .then(res => {
-                console.log("response in handle submit", res);
                 if (res.data.status === "Success") {
-                    navigate("/login");
+                    navigate("/");
                 };
             });
     };
@@ -98,7 +93,7 @@ const Register = () => {
                     </Item>
                     <Grid container>
                         <Grid item>
-                            <Link href="/login" variant="body2">
+                            <Link href="/" variant="body2">
                                 {"Vous avez déjà un compte? Connectez-vous ici"}
                             </Link>
                         </Grid>

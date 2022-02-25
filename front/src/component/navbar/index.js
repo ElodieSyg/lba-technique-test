@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { server } from "../../tool";
 // DEPENDENCIES IMPORTATIONS
 import {
     Box,
@@ -12,8 +13,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-// COMPONENTS IMPORTATIONS
-import StyledButton from "../button";
+import axios from "axios";
 
 const StyledAppBar = styled("div")({
     backgroundColor: "#5F9EA0",
@@ -38,7 +38,10 @@ const Navbar = () => {
     };
 
     const handleLogout = () => {
-        // add logout request
+        axios.get(`${server}/logout`, { withCredentials: true })
+            .then(res => {
+                navigate("/");
+            })
     };
 
     const LoggedNavbar = () => {
@@ -67,7 +70,7 @@ const Navbar = () => {
                         onClose={handleCloseUserMenu}
                     >
                         <MenuItem>
-                            <Typography onClick={() => handleRedirect("/")}>Home</Typography>
+                            <Typography onClick={() => handleRedirect("/home")}>Home</Typography>
                         </MenuItem>
                         <MenuItem>
                             <Typography onClick={() => handleRedirect("/dashboard")}>Dashboard</Typography>
@@ -77,25 +80,6 @@ const Navbar = () => {
                         </MenuItem>
                     </Menu>
                 </Box>
-            </Toolbar>
-        );
-    };
-
-    const NoLoggedNavbar = () => {
-        return (
-            <Toolbar>
-                <StyledButton
-                    variant="contained"
-                    width="8rem"
-                    onClick={() => handleRedirect("/login")}>
-                    Login
-                </StyledButton>
-                <StyledButton
-                    variant="outlined"
-                    width="8rem"
-                    onClick={() => handleRedirect("/register")}>
-                    Logout
-                </StyledButton>
             </Toolbar>
         );
     };

@@ -88,10 +88,11 @@ router.route("/:id")
         const { name, type, price, rating, warranty_years, available } = req.body;
 
         try {
-            await Product.findByIdAndUpdate({ _id: id }, { name, type, price, rating, warranty_years, available });
+            const productUpdated = await Product.findByIdAndUpdate({ _id: id }, { name, type, price, rating, warranty_years, available });
             return res.status(200).json({
                 status: "Success",
                 message: "Product succefully updated",
+                productUpdated,
             });
         } catch (error) {
             return res.status(500).json({
@@ -104,10 +105,11 @@ router.route("/:id")
         const id = req.params.id;
 
         try {
-            await Product.findByIdAndDelete({ _id: id });
+            const productDeleted = await Product.findByIdAndDelete({ _id: id });
             return res.status(200).json({
                 status: "Success",
                 message: "Product succefully deleted",
+                productDeleted,
             });
         } catch (error) {
             return res.status(500).json({
